@@ -16,7 +16,7 @@ var out = false;
 var gameState = "play";
 
 function preload() {
-    backgroundImg = loadImage("../sprites/bg.png");
+    backgroundImg = loadImage("./sprites/bg.png");
 }
 
 function setup() {
