@@ -6,7 +6,7 @@ class Screen {
         this.body = Bodies.rectangle(x, y, width, height, img, options);
         this.width = width;
         this.height = height;
-        this.image = loadImage(img);
+        this.image = loadImage("./sprites/" + img);
         World.add(world, this.body);
     }
     display() {
