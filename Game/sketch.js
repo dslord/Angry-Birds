@@ -49,8 +49,8 @@ function setup() {
     bird = new Bird(200, windowHeight - 340);
     bird_text = new Bird(45, 57);
 
-    game_over = new Screen(-2000, -2000, windowWidth, windowHeight, "../sprites/gameover.png");
-    winscreen = new Screen(-2000, -2000, windowWidth, windowHeight, "../sprites/youwin.png");
+    game_over = new Screen(-2000, -2000, windowWidth, windowHeight, "./sprites/gameover.png");
+    winscreen = new Screen(-2000, -2000, windowWidth, windowHeight, "./sprites/youwin.png");
 
     slingShot = new SlingShot(bird.body, { x: 200, y: windowHeight - 340 });
 }
