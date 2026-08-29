@@ -26,8 +26,8 @@ class SlingShot {
     }
 
     display() {
-        image(this.sling1, 200, windowHeight - 375);
-        image(this.sling2, 170, windowHeight - 375);
+        image(this.sling1, 200, GAME_HEIGHT - 375);
+        image(this.sling2, 170, GAME_HEIGHT - 375);
         
         if (this.sling.bodyA) {
             var pointA = this.sling.bodyA.position;

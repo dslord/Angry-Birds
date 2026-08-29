@@ -20,46 +20,46 @@ function preload() {
 }
 
 function setup() {
-    var canvas = createCanvas(windowWidth - 4, windowHeight - 4);
+    var canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
     engine = Engine.create();
     world = engine.world;
 
-    ground = new Ground(900, windowHeight, windowWidth + 200, 20);
-    platform = new Ground(150, windowHeight - 95, 300, 170);
+    ground = new Ground(700, GAME_HEIGHT, GAME_WIDTH + 200, 20);
+    platform = new Ground(150, GAME_HEIGHT - 95, 300, 170);
 
-    box1 = new Box(windowWidth - 400, windowHeight - 40, 70, 70);
-    box2 = new Box(windowWidth - 600, windowHeight - 40, 70, 70);
-    log1 = new Log(windowWidth - 500, windowHeight - 80, 300, PI / 2);
+    box1 = new Box(GAME_WIDTH - 400, GAME_HEIGHT - 40, 70, 70);
+    box2 = new Box(GAME_WIDTH - 600, GAME_HEIGHT - 40, 70, 70);
+    log1 = new Log(GAME_WIDTH - 500, GAME_HEIGHT - 80, 300, PI / 2);
 
-    box3 = new Box(windowWidth - 400, windowHeight - 100, 70, 70);
-    box4 = new Box(windowWidth - 600, windowHeight - 100, 70, 70);
+    box3 = new Box(GAME_WIDTH - 400, GAME_HEIGHT - 100, 70, 70);
+    box4 = new Box(GAME_WIDTH - 600, GAME_HEIGHT - 100, 70, 70);
 
     var fix_y = 40;
     for (var i = 0; i < pigs_count; i++) {
-        pigs[i] = new Pig(windowWidth - 500, windowHeight - fix_y);
+        pigs[i] = new Pig(GAME_WIDTH - 500, GAME_HEIGHT - fix_y);
         fix_y += 60;
     }
 
-    log3 =  new Log(windowWidth - 500, windowHeight - 180, 300, PI / 2);
+    log3 =  new Log(GAME_WIDTH - 500, GAME_HEIGHT - 180, 300, PI / 2);
 
-    box5 = new Box(windowWidth - 500, windowHeight - 220, 70, 70);
-    log4 = new Log(windowWidth - 550, windowHeight - 260, 150, PI / 7);
-    log5 = new Log(windowWidth - 450, windowHeight - 260, 150, -PI / 7);
+    box5 = new Box(GAME_WIDTH - 500, GAME_HEIGHT - 220, 70, 70);
+    log4 = new Log(GAME_WIDTH - 550, GAME_HEIGHT - 260, 150, PI / 7);
+    log5 = new Log(GAME_WIDTH - 450, GAME_HEIGHT - 260, 150, -PI / 7);
 
-    bird = new Bird(200, windowHeight - 340);
+    bird = new Bird(200, GAME_HEIGHT - 340);
     bird_text = new Bird(45, 57);
 
-    game_over = new Screen(-2000, -2000, windowWidth, windowHeight, "gameover.png");
-    winscreen = new Screen(-2000, -2000, windowWidth, windowHeight, "youwin.png");
+    game_over = new Screen(-2000, -2000, GAME_WIDTH, GAME_HEIGHT, "gameover.png");
+    winscreen = new Screen(-2000, -2000, GAME_WIDTH, GAME_HEIGHT, "youwin.png");
 
-    slingShot = new SlingShot(bird.body, { x: 200, y: windowHeight - 340 });
+    slingShot = new SlingShot(bird.body, { x: 200, y: GAME_HEIGHT - 340 });
 }
 
 function draw() {
     // Game Over
     if (birds <= 0 && pigs.length > 0) {
         setTimeout(() => {      
-            Matter.Body.setPosition(game_over.body, {x: windowWidth / 2, y: windowHeight / 2});
+            Matter.Body.setPosition(game_over.body, {x: GAME_WIDTH / 2, y: GAME_HEIGHT / 2});
             game_over.display();
         }, 1000);
 
@@ -68,7 +68,7 @@ function draw() {
 
     if (birds >= 0 && pigs.length == 0) {
         setTimeout(() => {
-            Matter.Body.setPosition(winscreen.body, {x: windowWidth / 2, y: windowHeight / 2});
+            Matter.Body.setPosition(winscreen.body, {x: GAME_WIDTH / 2, y: GAME_HEIGHT / 2});
             winscreen.display();
         }, 1000);
 
@@ -76,7 +76,7 @@ function draw() {
     }
 
     if (gameState == "play") {
-        image(backgroundImg, 0, 0, windowWidth, windowHeight);
+        image(backgroundImg, 0, 0, GAME_WIDTH, GAME_HEIGHT);
         Engine.update(engine);
             
         box1.display();
@@ -106,11 +106,11 @@ function draw() {
         fill("black");
         text(max(0, birds - 1), 45, 100);
 
-        if ((bird.body.speed < 0.3 || bird.body.position.x >= windowWidth || bird.body.position.x <= 0 || bird.body.position.y <= 0) && launched && !out) {
+        if ((bird.body.speed < 0.3 || bird.body.position.x >= GAME_WIDTH || bird.body.position.x <= 0 || bird.body.position.y <= 0) && launched && !out) {
             out = true;
             setTimeout(() => {
                 Matter.Body.setVelocity(bird.body, { x: 0, y: 0 });
-                Matter.Body.setPosition(bird.body, { x: 200, y: windowHeight - 340 });
+                Matter.Body.setPosition(bird.body, { x: 200, y: GAME_HEIGHT - 340 });
 
                 slingShot.attach(bird.body);
                 launched = false;
@@ -130,7 +130,7 @@ function mouseDragged() {
     if (launched) return;
 
     const slingX = 200;
-    const slingY = windowHeight - 340;
+    const slingY = GAME_HEIGHT - 340;
     const maxPull = 180;
         
     var dx = mouseX - slingX;
